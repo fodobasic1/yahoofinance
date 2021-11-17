@@ -20,5 +20,5 @@ from core import views as news_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('news', news_views.NewsList.as_view()),
-    path('news/<int:pk>/', news_views.NewsDetail.as_view(), name='retrieve-news')
+    path('news/<uuid:guid>/', news_views.NewsDetail.as_view(), name='retrieve-news')
 ]

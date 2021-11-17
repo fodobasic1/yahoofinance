@@ -10,5 +10,6 @@ class NewsList(generics.ListAPIView):
     serializer_class = NewsSerializer
 
 class NewsDetail(generics.RetrieveAPIView):
+    lookup_field = 'guid'
     queryset = News.objects.all()
     serializer_class = NewsSerializer
