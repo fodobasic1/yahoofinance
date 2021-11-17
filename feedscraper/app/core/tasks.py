@@ -1,12 +1,11 @@
 from app.celery import app
-from celery import shared_task
-import json
+from core.models import News
+
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
-from datetime import datetime # for time stamps
+from datetime import datetime 
 
-from core.models import News
 
 headers = {
     'referer':'https://mail.google.com/',
@@ -100,6 +99,7 @@ def scrape_twtr():
         print('The scraping job for %s failed. See exception : '%symbol)
         print(ex)
 
+
 @app.task
 def scrape_intc():
 
@@ -143,6 +143,7 @@ def scrape_intc():
         print('The scraping job for %s failed. See exception : '%symbol)
         print(ex)
 
+
 @app.task
 def scrape_gc_gold():
 
@@ -185,6 +186,7 @@ def scrape_gc_gold():
     except Exception as ex:
         print('The scraping job for %s failed. See exception : '%symbol)
         print(ex)
+
 
 @app.task(bind=True)
 def debug_task(self):

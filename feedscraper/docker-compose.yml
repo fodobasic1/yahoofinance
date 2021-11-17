@@ -37,4 +37,15 @@ services:
       - db
       - redis
       - app
-     
+  celery-beat: 
+    build:
+      context: .
+    command: celery -A app beat -l INFO
+    volumes:
+      - ./app:/app
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - redis
+      - app
