@@ -4,10 +4,10 @@ from rest_framework.pagination import PageNumberPagination
 # Create your models here.
 
 class News(models.Model):
+    guid=models.UUIDField(primary_key=True, unique=True)
     description=models.TextField()
     link=models.CharField(max_length=255)
     title=models.CharField(max_length=200)
-    guid=models.UUIDField()
     publishedDate=models.DateTimeField()
     symbol=models.CharField(max_length=20)
 
