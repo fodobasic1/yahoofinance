@@ -36,7 +36,7 @@ git clone https://github.com/fodobasic1/yahoofinance.git
 
 Navigate into root of the app
 ```sh
-yourFolder\moptask\yahoofinance\feedscraper\
+yourFolder\yahoofinance\feedscraper\
 ```
 and run docker-compose command
 ```sh
