@@ -18,14 +18,14 @@ app.conf.beat_schedule = {
        'task': 'core.tasks.scrape_twtr',
        'schedule': crontab(minute='*/1')
     },
+    'Scrape RSS Feed Symbol INTC': {
+       'task': 'core.tasks.scrape_intc',
+       'schedule': crontab(minute='*/1')
+    },
     'Scrape RSS Feed Symbol GC_GOLD': {
        'task': 'core.tasks.scrape_gc_gold',
        'schedule': crontab(minute='*/1')
     },
-    'Scrape RSS Feed Symbol INTC': {
-       'task': 'core.tasks.scrape_intc',
-       'schedule': crontab(minute='*/1')
-    }
 }
 
 app.autodiscover_tasks()
