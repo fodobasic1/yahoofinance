@@ -1,7 +1,6 @@
 from django.db import models
 from rest_framework.pagination import PageNumberPagination
 
-
 class News(models.Model):
     guid = models.UUIDField(primary_key=True, unique=True)
     description = models.TextField(max_length=1000)

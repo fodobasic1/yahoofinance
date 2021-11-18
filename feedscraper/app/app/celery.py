@@ -9,6 +9,8 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.enable_utc=False
 app.conf.update(timezone='CET')
 
+# configuring celery beat for tasks in core.tasks
+# just for the example, difference 'schedule' is put on each task (10m, 20m...)
 app.conf.beat_schedule = {
     'Scrape RSS Feed Symbol AAPL': {
         'task': 'core.tasks.scrape_aapl',

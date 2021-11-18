@@ -1,53 +1,58 @@
 from app.celery import app
 from core.models import News
 from django.conf import settings
+from core.helper import build_query_from_symbol
 
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
 from datetime import datetime 
 
-
+# Task for scraping RSS for symbol AAPL
 @app.task
 def scrape_aapl():
 
-    url = 'https://feeds.finance.yahoo.com/rss/2.0/headline?s=AAPL&region=US&lang=en-US'
     symbol = 'AAPL'
 
-    scrape_feed(url, symbol)
+    scrape_feed(symbol)
 
-
+# Task for scraping RSS for symbol TWTR
 @app.task
 def scrape_twtr():
 
-    url = 'https://feeds.finance.yahoo.com/rss/2.0/headline?s=TWTR&region=US&lang=en-US'
     symbol = 'TWTR'
 
-    scrape_feed(url, symbol)
+    scrape_feed(symbol)
 
-
+# Task for scraping RSS for symbol INTC
 @app.task
 def scrape_intc():
 
-    url = 'https://feeds.finance.yahoo.com/rss/2.0/headline?s=TWTR&region=US&lang=en-US'
     symbol = 'INTC'
 
-    scrape_feed(url, symbol)
+    scrape_feed(symbol)
 
-
+# Task for scraping RSS for symbol GC=F
 @app.task
 def scrape_gc_gold():
 
-    url = 'https://feeds.finance.yahoo.com/rss/2.0/headline?s=GC%3DF&region=US&lang=en-US'
     symbol = 'GC=F'
 
-    scrape_feed(url, symbol)
+    scrape_feed(symbol)
 
+# Root function for scraping feed with input parameter 'symbol',
+# which reprents for which symbol is scraping going to be done [AAPL, TWTR, GC=F, INTC].
 
+# Function calls helper method for building query, creates request and calls GET with that URL
+# BeautifulSoup will pull data from recieved XML
+
+# UPSERT - because tasks are running periodically, sometimes same articles might be pulled - or at least same GUID
+# if that GUID already exists - update other fields. If not - create new object 
 @app.task
-def scrape_feed(_url, _symbol):
+def scrape_feed(_symbol):
     try:
         print('Starting rss feed scrape for symbol %s!'%_symbol)
+        _url = build_query_from_symbol(_symbol)
         req = requests.get(
             url = _url,
             headers = settings.HEADERS
