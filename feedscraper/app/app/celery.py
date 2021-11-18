@@ -12,19 +12,19 @@ app.conf.update(timezone='CET')
 app.conf.beat_schedule = {
     'Scrape RSS Feed Symbol AAPL': {
         'task': 'core.tasks.scrape_aapl',
-        'schedule': crontab(minute='*/1')
+        'schedule': crontab(minute='*/10')
     },
     'Scrape RSS Feed Symbol TWTR': {
        'task': 'core.tasks.scrape_twtr',
-       'schedule': crontab(minute='*/1')
+       'schedule': crontab(minute='*/20')
     },
     'Scrape RSS Feed Symbol INTC': {
        'task': 'core.tasks.scrape_intc',
-       'schedule': crontab(minute='*/1')
+       'schedule': crontab(minute='*/30')
     },
     'Scrape RSS Feed Symbol GC_GOLD': {
        'task': 'core.tasks.scrape_gc_gold',
-       'schedule': crontab(minute='*/1')
+       'schedule': crontab(minute='*/40')
     },
 }
 
